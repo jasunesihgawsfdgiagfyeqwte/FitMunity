@@ -89,3 +89,27 @@ document.querySelectorAll('.cta-button').forEach(button => {
         }
     });
 });
+
+// Nevbar following hightlight
+const sections = document.querySelectorAll('section'); // get all sections
+const navButtons = document.querySelectorAll('.navbar button'); // get all nev buttons
+
+window.addEventListener('scroll', () => {
+    let currentSection = '';
+
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+
+        if (window.scrollY >= sectionTop - 50 && window.scrollY < sectionTop + sectionHeight - 50) {
+            currentSection = section.className.split(' ')[0]; // get class name
+        }
+    });
+
+    navButtons.forEach(button => {
+        button.classList.remove('active');
+        if (button.dataset.target === currentSection) {
+            button.classList.add('active');
+        }
+    });
+});
